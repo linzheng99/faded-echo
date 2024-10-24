@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+import { ThemeProvider } from '@/components/ThemeProvider';
+import Navbar from "@/components/Navbar";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -24,11 +27,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="w-full px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 h-24">
+            <Navbar />
+          </div>
+          <div className="px-4 pt-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 h-[calc(100vh-96px)]">
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

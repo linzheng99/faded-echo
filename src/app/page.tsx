@@ -1,6 +1,9 @@
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="origin-left">Home</div>
+    <div>
+      <Button>Secondary</Button>
+    </div>
   );
 }
