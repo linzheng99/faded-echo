@@ -6,7 +6,7 @@ import Stories from "@/components/Stories";
 
 export default function Home() {
   return (
-    <div className="flex gap-6 pt-4 ">
+    <div className="flex gap-6">
       <div className="hidden xl:block xl:w-[20%]">
         <LeftMenu />
       </div>
@@ -17,7 +17,7 @@ export default function Home() {
           <Feed />
         </div>
       </div>
-      <div className="hidden lg:block w-[30%] border">
+      <div className="hidden lg:block w-[30%]">
         <RightMenu />
       </div>
     </div>
