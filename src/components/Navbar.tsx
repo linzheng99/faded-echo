@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 
 export default function Header() {
   return (
-    <div className="flex border-b h-full items-center justify-between gap-8 shadow-sm">
+    <div className="flex border-b h-full items-center justify-between gap-8">
       <div className="md:hidden lg:block">
         <Link href={'/'} className="font-bold text-xl">Faded Echo</Link>
       </div>
