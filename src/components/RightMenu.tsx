@@ -1,5 +1,4 @@
 import FriendRequest from '@/components/FriendRequest';
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import FriendBirthday from '@/components/FriendBirthday';
 import Ad from '@/components/Ad';
 

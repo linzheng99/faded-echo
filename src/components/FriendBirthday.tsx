@@ -15,13 +15,13 @@ export default function FriendRequest() {
             <Avatar className="w-10 h-10">
               <AvatarImage src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="image" />
             </Avatar>
-            <div>Beauty images</div>
+            <div className="font-semibold">Beauty images</div>
           </div>
           <Button size="sm">Celebrate</Button>
         </div>
       </CardContent>
       <CardFooter>
-        <div className="w-full bg-slate-400 rounded-md p-2 flex items-center">
+        <div className="w-full bg-slate-300 rounded-md p-2 flex items-center">
           <div className="flex gap-2 items-center">
             <Gift className="w-8 h-8" />
             <div className="flex flex-col gap-1 text-sm">

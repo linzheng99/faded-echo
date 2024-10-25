@@ -4,7 +4,7 @@ import { Ellipsis, Smile, ThumbsUp } from 'lucide-react';
 export default function Comment() {
   return (
     <div>
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col my-4'>
         <div className='flex gap-2 items-center'>
           <Avatar className="w-8 h-8">
             <AvatarImage src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="image" />
@@ -17,7 +17,7 @@ export default function Comment() {
           </div>
         </div>
       </div>
-      <div className='mt-6'>
+      <div className='mt-8'>
         <div className='flex gap-4 justify-between'>
           <Avatar className="w-10 h-10">
             <AvatarImage src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="image" />
