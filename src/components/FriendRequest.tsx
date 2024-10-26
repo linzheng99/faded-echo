@@ -5,12 +5,15 @@ import { CircleCheck, CircleX } from "lucide-react";
 
 const requestList = [
   {
+    id:1,
     name: 'Beauty images'
   },
   {
+    id:2,
     name: 'Beauty images'
   },
   {
+    id:3,
     name: 'Beauty images'
   },
 ]
@@ -28,7 +31,7 @@ export default function FriendRequest() {
         <div className="flex flex-col gap-4">
           {
             requestList.map(item => (
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center" key={item.id}>
                 <div className="flex items-center gap-4 cursor-pointer">
                   <Avatar className="w-10 h-10">
                     <AvatarImage src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="image" />
