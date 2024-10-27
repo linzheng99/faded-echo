@@ -51,8 +51,8 @@ export default async function Profile(props: { params: Promise<{ username: strin
         <div className="w-full lg:w-[70%] xl:w-[50%]">
           <div className="flex flex-col gap-6">
             <div className="relative h-64">
-              <Image src="https://images.pexels.com/photos/1379636/pexels-photo-1379636.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" fill className="object-cover rounded-md" />
-              <Image src="https://images.pexels.com/photos/668465/pexels-photo-668465.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" width={96} height={96} className="rounded-full object-cover w-24 h-24 absolute left-0 right-0 m-auto -bottom-6 ring-1 ring-white" />
+              <Image src={user.cover || '/noCover.png'} alt="" fill className="object-cover rounded-md" />
+              <Image src={user.avater || '/noAvater.png'} alt="" width={96} height={96} className="rounded-full object-cover w-24 h-24 absolute left-0 right-0 m-auto -bottom-6 ring-1 ring-white" />
             </div>
             <div className="flex flex-col justify-center items-center">
               <div className="my-2">
@@ -69,7 +69,7 @@ export default async function Profile(props: { params: Promise<{ username: strin
                 </div>
                 <div className="flex flex-col w-1/6 items-center">
                   <span className="font-semibold">{user._count.followings}</span>
-                  <span className="text-sm">Followering</span>
+                  <span className="text-sm">Following</span>
                 </div>
               </div>
             </div>

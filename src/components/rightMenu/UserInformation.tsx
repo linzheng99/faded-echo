@@ -20,8 +20,10 @@ export default async function UserInformation({ user }: { user: User }) {
   let isFollowingSent = false
 
   const { userId: currentUserId } = await auth()
+
   if (!currentUserId) return
 
+  const otherUser = currentUserId && currentUserId !== user.id ? true : false
   // 检查当前用户是否 blocked 了指定用户
   const blockRes = await prisma.block.findFirst({
     where: {
@@ -52,10 +54,10 @@ export default async function UserInformation({ user }: { user: User }) {
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle className="text-lg">User Information</CardTitle>
-          <Button variant='link'>see all</Button>
+          {!otherUser && <Button variant='link'>UpdateUser</Button>}
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className={`${!otherUser && 'pb-0'}`}>
         <div className="flex flex-col gap-4">
           <div className="flex gap-2">
             <h1 className="text-xl font-semibold">{generateName(user)}</h1>
@@ -106,12 +108,15 @@ export default async function UserInformation({ user }: { user: User }) {
         </div>
       </CardContent>
       <CardFooter>
-        <UserInfoCardInteraction
-          userId={user.id}
-          isFollowing={isFollowing}
-          isUserBlocked={isUserBlocked}
-          isFollowingSent={isFollowingSent}
-        />
+        {
+          otherUser &&
+          <UserInfoCardInteraction
+            userId={user.id}
+            isFollowing={isFollowing}
+            isUserBlocked={isUserBlocked}
+            isFollowingSent={isFollowingSent}
+          />
+        }
       </CardFooter>
     </Card>
   )
