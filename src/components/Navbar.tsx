@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ModeToggle } from '@/components/ModeToggle';
-import MobileMenu from "@/components/rightMenu/MobileMenu";
+import MobileMenu from "@/components/MobileMenu";
 import { Bell, CirclePlus, CircleUserRound, Home, LoaderCircle, MessageSquareText, Search, UsersRound } from "lucide-react";
 import { ClerkLoaded, ClerkLoading, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from '@/components/ui/button';

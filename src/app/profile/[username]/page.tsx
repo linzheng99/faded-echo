@@ -58,16 +58,16 @@ export default async function Profile(props: { params: Promise<{ username: strin
               <div className="my-2">
                 <h1 className="font-bold text-2xl">{generateName(user)}</h1>
               </div>
-              <div className="flex gap-6">
-                <div className="flex flex-col items-center">
+              <div className="flex gap-6 w-full justify-center">
+                <div className="flex flex-col w-1/6 items-center">
                   <span className="font-semibold">{user._count.posts}</span>
                   <span className="text-sm">Posts</span>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col w-1/6 items-center">
                   <span className="font-semibold">{user._count.followers}</span>
                   <span className="text-sm">Followers</span>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col w-1/6 items-center">
                   <span className="font-semibold">{user._count.followings}</span>
                   <span className="text-sm">Followering</span>
                 </div>

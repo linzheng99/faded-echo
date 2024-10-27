@@ -2,8 +2,23 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from 'next/image';
 import { User } from "@prisma/client";
+import prisma from "@/lib/client";
 
-export default function UserMedia({ user }: { user: User }) {
+export default async function UserMedia({ user }: { user: User }) {
+
+  const postWithMedia = await prisma.post.findMany({
+    where: {
+      userId: user.id,
+      img: {
+        not: null
+      }
+    },
+    take: 8,
+    orderBy: {
+      createdAt: 'desc'
+    }
+  })
+
   return (
     <Card>
       <CardHeader>
@@ -13,32 +28,19 @@ export default function UserMedia({ user }: { user: User }) {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-4 gap-2">
-          <div className="h-24 relative">
-            <Image src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" fill className="object-cover rounded-md" />
-          </div>
-          <div className="h-24 relative">
-            <Image src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" fill className="object-cover rounded-md" />
-          </div>
-          <div className="h-24 relative">
-            <Image src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" fill className="object-cover rounded-md" />
-          </div>
-          <div className="h-24 relative">
-            <Image src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" fill className="object-cover rounded-md" />
-          </div>
-          <div className="h-24 relative">
-            <Image src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" fill className="object-cover rounded-md" />
-          </div>
-          <div className="h-24 relative">
-            <Image src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" fill className="object-cover rounded-md" />
-          </div>
-          <div className="h-24 relative">
-            <Image src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" fill className="object-cover rounded-md" />
-          </div>
-          <div className="h-24 relative">
-            <Image src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" fill className="object-cover rounded-md" />
-          </div>
-        </div>
+        {
+          postWithMedia.length ? (
+            <div className="grid grid-cols-4 gap-2">
+              {
+                postWithMedia.map(media => (
+                  <div className="h-24 relative" key={media.id}>
+                    <Image src={media.img!} alt="" fill className="object-cover rounded-md" />
+                  </div>
+                ))
+              }
+            </div>
+          ) : 'Not media found...'
+        }
       </CardContent>
     </Card>
   )
