@@ -1,6 +1,6 @@
 import { Ellipsis, Heart, MessageCircleMore, SquareArrowOutUpRight } from "lucide-react";
 import Image from 'next/image';
-import Comment from '@/components/Comment';
+import Comment from '@/components/feed/Comment';
 
 export default function Post() {
   return (

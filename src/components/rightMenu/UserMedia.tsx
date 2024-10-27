@@ -1,8 +1,9 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from 'next/image';
+import { User } from "@prisma/client";
 
-export default function UserMedia({ userId }: { userId: string }) {
+export default function UserMedia({ user }: { user: User }) {
   return (
     <Card>
       <CardHeader>

@@ -1,4 +1,4 @@
-import ProfileCard from '@/components/ProfileCard';
+import ProfileCard from '@/components/leftMenu/ProfileCard';
 import Ad from '@/components/Ad';
 import { Button } from '@/components/ui/button';
 import { Link } from 'lucide-react';

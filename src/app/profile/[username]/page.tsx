@@ -1,9 +1,47 @@
-import Feed from "@/components/Feed";
-import LeftMenu from "@/components/LeftMenu";
-import RightMenu from "@/components/RightMenu";
+import Feed from "@/components/feed/Feed";
+import LeftMenu from "@/components/leftMenu/LeftMenu";
+import RightMenu from "@/components/rightMenu/RightMenu";
+import prisma from "@/lib/client";
+import { generateName } from "@/lib/utils";
+import { auth } from "@clerk/nextjs/server";
 import Image from 'next/image';
+import { notFound } from "next/navigation";
 
-export default function Profile() {
+export default async function Profile(props: { params: Promise<{ username: string }> }) {
+  const { username } = await props.params;
+
+  const user = await prisma.user.findFirst({
+    where: {
+      username
+    },
+    include: {
+      _count: {
+        select: {
+          followers: true,
+          followings: true,
+          posts: true
+        }
+      }
+    }
+  })
+
+  if (!user) return notFound()
+
+  const { userId: currentUserId } = await auth()
+
+  let isBlocked;
+  if (currentUserId) {
+    // 是不是被当前用户 blocked
+    const blockUser = await prisma.block.findFirst({
+      where: {
+        blockerId: user.id,
+        blockedId: currentUserId
+      }
+    })
+    isBlocked = blockUser ? true : false
+  }
+  if (isBlocked) return notFound()
+
   return (
     <div className="">
       <div className="flex gap-6">
@@ -18,19 +56,19 @@ export default function Profile() {
             </div>
             <div className="flex flex-col justify-center items-center">
               <div className="my-2">
-                <h1 className="font-bold text-2xl">Faded Echo</h1>
+                <h1 className="font-bold text-2xl">{generateName(user)}</h1>
               </div>
               <div className="flex gap-6">
                 <div className="flex flex-col items-center">
-                  <span className="font-medium">142</span>
+                  <span className="font-semibold">{user._count.posts}</span>
                   <span className="text-sm">Posts</span>
                 </div>
                 <div className="flex flex-col items-center">
-                  <span className="font-medium">1.2K</span>
+                  <span className="font-semibold">{user._count.followers}</span>
                   <span className="text-sm">Followers</span>
                 </div>
                 <div className="flex flex-col items-center">
-                  <span className="font-medium">1.4K</span>
+                  <span className="font-semibold">{user._count.followings}</span>
                   <span className="text-sm">Followering</span>
                 </div>
               </div>
@@ -39,7 +77,7 @@ export default function Profile() {
           </div>
         </div>
         <div className="hidden lg:block w-[30%]">
-          <RightMenu />
+          <RightMenu user={user} />
         </div>
       </div></div>
   )
