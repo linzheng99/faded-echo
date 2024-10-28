@@ -2,6 +2,8 @@
 
 import { auth } from "@clerk/nextjs/server"
 import prisma from "./client"
+import { z } from "zod";
+import { formSchema } from "@/components/rightMenu/UpdateUser";
 
 
 export const switchFollow = async (userId: string) => {
@@ -152,4 +154,20 @@ export const rejectFollowRequest = async (userId: string) => {
     throw new Error("Something went wrong!");
   }
 
+}
+
+export const updateProfile = async (values: z.infer<typeof formSchema>) => {
+  const { userId: currentUserId } = await auth()
+  if (!currentUserId) return
+  try {
+    await prisma.user.update({
+      where: {
+        id: currentUserId
+      },
+      data: values
+    })
+  } catch (error) {
+    console.log(error);
+    throw new Error("Something went wrong!");
+  }
 }

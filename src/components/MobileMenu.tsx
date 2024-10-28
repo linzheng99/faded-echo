@@ -14,7 +14,7 @@ export default function MobileMenu() {
       </Button>
       {
         isOpen && (
-          <div className="absolute top-24 left-0 h-[calc(100vh-96px)] flex flex-col items-center justify-center w-full font-medium text-xl gap-4 z-20">
+          <div className="absolute top-24 left-0 h-[calc(100vh-96px)] flex flex-col items-center justify-center w-full font-medium text-xl gap-4 z-20 bg-background">
             <Link href='/'>Home</Link>
             <Link href='/'>Friends</Link>
             <Link href='/'>Groups</Link>

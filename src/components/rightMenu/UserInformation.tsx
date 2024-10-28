@@ -1,5 +1,4 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Briefcase, Calendar, GraduationCap, Link as LinkIcon, MapPin } from "lucide-react";
 import { User } from "@prisma/client";
 import { generateName } from "@/lib/utils";
@@ -7,6 +6,7 @@ import Link from "next/link";
 import prisma from "@/lib/client";
 import { auth } from "@clerk/nextjs/server";
 import UserInfoCardInteraction from "./UserInfoCardInteraction";
+import UpdateUser from "@/components/rightMenu/UpdateUser";
 
 export default async function UserInformation({ user }: { user: User }) {
   const { city, school, work, description, username, website, createdAt } = user
@@ -54,7 +54,7 @@ export default async function UserInformation({ user }: { user: User }) {
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle className="text-lg">User Information</CardTitle>
-          {!otherUser && <Button variant='link'>UpdateUser</Button>}
+          {!otherUser && <UpdateUser user={user} />}
         </div>
       </CardHeader>
       <CardContent className={`${!otherUser && 'pb-0'}`}>
