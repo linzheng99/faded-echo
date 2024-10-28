@@ -35,8 +35,8 @@ export default async function UserInformation({ user }: { user: User }) {
   // 检查当前用户是否 follow 了指定用户
   const followRes = await prisma.follower.findFirst({
     where: {
-      followerId: currentUserId,
-      followingId: user.id
+      followerId: user.id, // 被关注的用户
+      followingId: currentUserId
     }
   })
   isFollowing = followRes ? true : false

@@ -11,8 +11,8 @@ export const switchFollow = async (userId: string) => {
     // 当前用户已经关注了指定的用户
     const existingFollow = await prisma.follower.findFirst({
       where: {
-        followerId: currentUserId,
-        followingId: userId
+        followerId: userId,
+        followingId: currentUserId
       }
     })
     // 已经关系 -> 取消关注

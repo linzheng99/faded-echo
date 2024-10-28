@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import prisma from "@/lib/client";
 import { auth } from "@clerk/nextjs/server";
 import { generateName } from "@/lib/utils";
+import Link from 'next/link';
 
 export default async function ProfileCard() {
   const { userId } = await auth()
@@ -43,7 +44,11 @@ export default async function ProfileCard() {
               </div>
               <span>{user._count.followers} followers</span>
             </div>
-            <Button size='sm'>My Profile</Button>
+            <Button size='sm'>
+              <Link href={`/profile/${user.username}`}>
+                My Profile
+              </Link>
+            </Button>
           </div>
         </div>
       </CardContent>

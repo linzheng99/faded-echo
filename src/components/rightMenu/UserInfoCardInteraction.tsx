@@ -30,7 +30,7 @@ export default function UserInfoCardInteraction(
       {
         ...state,
         following: state.following && false,
-        followingRequestSent: !state.following && !state.followingRequestSent ? true : false
+        followingRequestSent: state.following ? false : true
       } : {
         ...state,
         blocked: !state.blocked
@@ -43,9 +43,8 @@ export default function UserInfoCardInteraction(
       await switchFollow(userId);
       setUserState((prev) => ({
         ...prev,
-        following: prev.following && false,
-        followingRequestSent:
-          !prev.following && !prev.followingRequestSent ? true : false,
+        following: false, // 关注操作 -> 设置为false
+        followingRequestSent: !prev.following, // 没关注 -> 发送请求
       }));
     } catch (error) {
       console.log(error)
