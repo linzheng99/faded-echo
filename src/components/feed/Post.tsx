@@ -16,7 +16,7 @@ export default async function Post({ post }: { post: FeedPostType }) {
   const { userId: currentUserId } = await auth()
   const { user, _count } = post
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 border p-4 rounded-lg shadow-sm">
       <div className="flex justify-between">
         <div className="flex gap-2 justify-center items-center">
           <Image src={user.avater || '/noAvater.png'} alt="post image" width={40} height={40} className="rounded-full w-10 h-10" />

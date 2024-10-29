@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs/server"
 import prisma from "./client"
 import { z } from "zod";
 import { formSchema } from "@/components/rightMenu/UpdateUser";
+import { revalidatePath } from "next/cache";
 
 
 export const switchFollow = async (userId: string) => {
@@ -229,5 +230,27 @@ export const addComment = async (postId: number, desc: string) => {
     throw new Error("Something went wrong!");
   }
 
+}
+
+export const addPost = async (formData: FormData, img: string) => {
+  const { userId: currentUserId } = await auth()
+
+  if (!currentUserId) throw new Error('User is not authenticated')
+  const desc = formData.get('desc') as string
+  if (!desc) return
+
+  try {
+    await prisma.post.create({
+      data: {
+        userId: currentUserId,
+        desc,
+        img
+      }
+    })
+    revalidatePath("/");
+  } catch (error) {
+    console.log(error);
+    throw new Error("Something went wrong!");
+  }
 }
 

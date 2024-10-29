@@ -8,7 +8,7 @@ import { Comment, User } from "@prisma/client";
 import { Ellipsis, ThumbsUp, Smile } from "lucide-react";
 import { useOptimistic, useState } from "react";
 
-type CommentWithUser = Comment & { user: User } 
+type CommentWithUser = Comment & { user: User }
 
 export default function CommentList({ postId, comments }: { postId: number, comments: CommentWithUser[] }) {
   const { user } = useUser()
@@ -47,6 +47,7 @@ export default function CommentList({ postId, comments }: { postId: number, comm
       const createdComment = await addComment(postId, desc)
       setCommentState((prev) => [createdComment as unknown as CommentWithUser, ...prev]);
     } catch (error) {
+      console.log(error)
     }
   }
 

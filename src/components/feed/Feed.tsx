@@ -8,6 +8,7 @@ export default async function Feed({ username }: { username?: string }) {
 
   if (!currentUserId) throw new Error('User is not authenticated')
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let posts: any[] = []
 
   // 访问其他用户的个人页面
@@ -76,7 +77,7 @@ export default async function Feed({ username }: { username?: string }) {
   }
 
   return (
-    <div className="border p-4 rounded-lg shadow-sm ">
+    <div className="space-y-4">
       {posts.length ?
         (posts.map(post => <Post post={post} key={post.id} />)) : 'No posts found...'
       }
