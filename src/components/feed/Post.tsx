@@ -34,7 +34,7 @@ export default async function Post({ post }: { post: FeedPostType }) {
         <p>{post.desc}</p>
       </div>
       <PostInteraction postId={post.id} likes={post.likes.map(like => like.userId)} commentNumber={_count.comments} currentUserId={currentUserId} />
-      <Comment />
+      <Comment postId={post.id} />
     </div>
   )
 }

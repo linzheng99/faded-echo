@@ -1,10 +1,9 @@
 "use client"
 
 import { switchLike } from "@/lib/action";
-import { useAuth } from "@clerk/nextjs";
 import { Heart, MessageCircleMore, SquareArrowOutUpRight } from "lucide-react";
 import { useOptimistic, useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 export default function PostInteraction({
   postId,
