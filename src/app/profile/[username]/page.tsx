@@ -73,7 +73,7 @@ export default async function Profile(props: { params: Promise<{ username: strin
                 </div>
               </div>
             </div>
-            <Feed />
+            <Feed username={user.username} />
           </div>
         </div>
         <div className="hidden lg:block w-[30%]">

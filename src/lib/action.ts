@@ -158,7 +158,7 @@ export const rejectFollowRequest = async (userId: string) => {
 
 export const updateProfile = async (values: z.infer<typeof formSchema>) => {
   const { userId: currentUserId } = await auth()
-  if (!currentUserId) return
+  if (!currentUserId) throw new Error('User is not authenticated')
   try {
     await prisma.user.update({
       where: {
@@ -171,3 +171,38 @@ export const updateProfile = async (values: z.infer<typeof formSchema>) => {
     throw new Error("Something went wrong!");
   }
 }
+
+export const switchLike = async (postId: number) => {
+  const { userId: currentUserId } = await auth()
+
+  if (!currentUserId) throw new Error('User is not authenticated')
+
+  try {
+    const existingLike = await prisma.like.findFirst({
+      where: {
+        userId: currentUserId,
+        postId: postId
+      }
+    })
+
+    if (existingLike) {
+      await prisma.like.delete({
+        where: {
+          id: existingLike.id
+        }
+      })
+    } else {
+      await prisma.like.create({
+        data: {
+          userId: currentUserId,
+          postId: postId
+        }
+      })
+    }
+
+  } catch (error) {
+    console.log(error);
+    throw new Error("Something went wrong!");
+  }
+}
+
