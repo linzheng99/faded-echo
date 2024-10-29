@@ -1,10 +1,10 @@
-import { Ellipsis } from "lucide-react";
 import Image from 'next/image';
 import Comment from '@/components/feed/Comment';
 import { Post as PostType, User } from "@prisma/client";
 import { generateName } from "@/lib/utils";
 import PostInteraction from "@/components/feed/PostInteraction";
 import { auth } from "@clerk/nextjs/server";
+import PostMenu from "@/components/feed/PostMenu";
 
 type FeedPostType = PostType & { user: User } & {
   likes: [{ userId: string }];
@@ -22,7 +22,10 @@ export default async function Post({ post }: { post: FeedPostType }) {
           <Image src={user.avater || '/noAvater.png'} alt="post image" width={40} height={40} className="rounded-full w-10 h-10" />
           <span className="font-semibold">{generateName(user)}</span>
         </div>
-        <Ellipsis className="cursor-pointer" />
+        {
+          post.userId === currentUserId &&
+          <PostMenu postId={post.id} />
+        }
       </div>
       <div className="flex flex-col gap-4">
         {

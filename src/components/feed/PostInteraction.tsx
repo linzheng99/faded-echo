@@ -36,7 +36,7 @@ export default function PostInteraction({
         isLiked: !state.isLiked
       }))
     } catch (error) {
-
+      console.log(error)
     }
   }
 
